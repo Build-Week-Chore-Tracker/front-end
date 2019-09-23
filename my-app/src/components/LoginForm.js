@@ -28,12 +28,11 @@ import * as Yup from "yup";
 
 
 
-    const FormikSignupForm = withFormik({
+    const FormikLoginForm = withFormik({
         mapPropsToValues({email,pass}){
             return{
-                
                 email: email || "",
-                pass:  pass|| ""
+                pass:  pass || ""
             }
         },
         validationSchema: Yup.object().shape({
