@@ -11,13 +11,12 @@ import { Route } from 'react-router-dom';
 function App() {
   return (
     <div className="App">
-      <h1>Chore Tracker!</h1>
-      <NavBar />
-      <Route exact path="/signup" component={SignupForm} />
-      <Route exact path="/login" component={loginForm} />
-      <Route exact path="/" component={Family}/>
+      <Route   path="/" component={NavBar} />
+      <Route  exact path="/signup" component={SignupForm} />
+      <Route  exact path="/login" component={loginForm} />
       
-      <Route   exact path="/chores" component={Chores}/>
+      <Route  exact path="/" component={Family}/>
+      <Route  exact path="/chores" component={Chores}/>
       
     </div>
   );

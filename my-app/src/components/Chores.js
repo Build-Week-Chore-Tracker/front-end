@@ -1,10 +1,43 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from "axios";
+import {Form,Field,withFormik} from "formik"
+import * as Yup from "yup";
 
-const Chores = () =>{
+
+const Chores = ({values, status}) =>{
+    const [chores, setChores] = useState("");
+        useEffect(()=> {
+            status && setChores(chores => [...chores, status])
+        },[status]);
     return (
-        <h1>Chores</h1>
-    )
-}
+        <div> 
+            <h1>Chores</h1>
+            <Form>
+                <Field type="text" name="chores" placeholder="Add new chore"/>
+                <button type="submit">Add Chore</button>
+            </Form>
+            {/* {chores.map(chore =>(
+                <p>{chore}</p>
+            ))} */}
+        </div>
+    );
+};
+    const FormikChores = withFormik({
+        mapPropsToValues({chores}){
+            return{
+                chores: chores || ""
+            }
+        },
+
+        handleSubmit(values,{setStatus}){
+            axios
+                .post("", values)
+                .then(res => {
+                    setStatus(res.data)
+                })
+                .catch(err => console.log(err.response))
+        }
+})(Chores)
 
 
-export default Chores
+export default FormikChores
