@@ -21,7 +21,7 @@ margin-top:10%;
 border:1px solid black;
 border-radius:5px;
 height:3vh;
-
+font-size:1.8rem;
 `;
     const SignupForm = ({errors, touched, values, status}) => {
 

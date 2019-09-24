@@ -1,6 +1,5 @@
 import React from "react";
-import Chores from "./Chores"
-import Family from "./Family"
+
 import {Link} from 'react-router-dom'
 import styled from "styled-components";
 
@@ -8,14 +7,15 @@ import styled from "styled-components";
         display:flex;
         align-items:center;
         justify-content:space-around;
+        text-decoration: none;
     `;
 const NavBar = () => {
     return (
         <NavDiv>
             <h1>Chore Tracker!</h1>
-            <Link to="/">Family</Link>
-            <Link to="/Chores">Chores</Link>
-            <Link to="/settings">Settings</Link>
+            <Link className="nav-links" to="/">Family</Link>
+            <Link className="nav-links" to="/Chores">Chores</Link>
+            <Link className="nav-links" to="/settings">Settings</Link>
         </NavDiv>
     )
 }

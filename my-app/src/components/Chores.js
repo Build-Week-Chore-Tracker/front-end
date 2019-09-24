@@ -16,7 +16,7 @@ const Chores = ({values, status}) =>{
                 <Field type="text" name="chores" placeholder="Add new chore"/>
                 <button type="submit">Add Chore</button>
             </Form>
-            {/* {chores.map(chore =>(
+            {/* {chores.map(chore => (
                 <p>{chore}</p>
             ))} */}
         </div>

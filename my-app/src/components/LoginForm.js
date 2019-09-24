@@ -20,7 +20,7 @@ import styled from "styled-components";
         border:1px solid black;
         border-radius:5px;
         height:3vh;
-        
+        font-size:1.8rem;
     `;
 
 
