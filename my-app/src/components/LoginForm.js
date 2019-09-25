@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios"
+import AxiosAuth from "./AxiosAuth";
 import {Form,Field,withFormik} from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
@@ -24,25 +24,25 @@ import styled from "styled-components";
     `;
 
 
-    const LoginForm = ({errors, touched, values, status}) => {
+    const LoginForm = ({errors, touched, values, }) => {
 
         return (
             <FormDiv>
                 <Form className="form-parent-login">
                 
                     <div className="field-child">
-                    <Field className="no-border" type="text" name="email" placeholder="Email"/>
+                    <Field className="no-border" type="text" name="username" placeholder="Username"/>
                     
                     </div> 
-                    {touched.email && errors.email && (
-                                <span>{errors.email}</span>
+                    {touched.username && errors.username && (
+                                <span>{errors.username}</span>
                         )}
                     <div className="field-child">
-                    <Field  className="no-border" type="text" name="pass" placeholder="Password"/>
+                    <Field  className="no-border" type="text" name="password" placeholder="Password"/>
                         
                     </div>
-                    {touched.pass && errors.pass && (
-                                <span>{errors.pass}</span>
+                    {touched.password && errors.password && (
+                                <span>{errors.password}</span>
                         )}
                     <BStyle type="submit">Login!</BStyle>
                 </Form>
@@ -53,28 +53,27 @@ import styled from "styled-components";
 
 
     const FormikLoginForm = withFormik({
-        mapPropsToValues({email,pass}){
+        mapPropsToValues({username,password}){
             return{
-                email: email || "",
-                pass:  pass || ""
+                username: username || "",
+                password:  password || ""
             }
         },
         validationSchema: Yup.object().shape({
             
-            email: Yup.string()
-            .email("Invalid email")
-            .required("You must include an email"),
-            pass: Yup.string()
+            username: Yup.string()
+            .required("You must include a username"),
+            password: Yup.string()
             .min(3, "Too Short!")
             .max(25, "Too Long!")
             .required("You must include a password")
         }),
 
-        handleSubmit(values, {setStatus}){
-            axios
-                .post("", values)
+        handleSubmit(values, ){
+            AxiosAuth()
+                .post("https://chore-tracker-app.herokuapp.com/api/auth/login", values)
                 .then(res =>{
-                    // setStatus(res.data)
+                    
                     console.log(res);
                 })
                 .catch(err => console.log(err.response));

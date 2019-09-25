@@ -1,5 +1,6 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import axios from "axios"
+// import AxiosAuth from "./AxiosAuth"
 import {Form,Field,withFormik} from "formik";
 import * as Yup from "yup";
 import styled from "styled-components"
@@ -23,8 +24,14 @@ border-radius:5px;
 height:3vh;
 font-size:1.8rem;
 `;
-    const SignupForm = ({errors, touched, values, status}) => {
-
+    const SignupForm = ({user,setUser,errors, touched, values, status}) => {
+        
+        console.log("user", user)
+        useEffect(()=>{
+            if(status){
+                setUser([...user, status] )
+            }
+        },[])
         return (
             <FormDiv>
                 <Form className="form-parent-signup">
@@ -35,10 +42,10 @@ font-size:1.8rem;
                             <span>{errors.name}</span>
                         )}
                         <div className="field-child">
-                        <Field className="no-border" type="text" name="lastName" placeholder="Last Name"/>
+                        <Field className="no-border" type="text" name="username" placeholder="Username"/>
                         </div>
-                        {touched.lastName && errors.lastName && (
-                            <span>{errors.lastName}</span>
+                        {touched.username && errors.username && (
+                            <span>{errors.username}</span>
                         )}
                     <div className="field-child">
                     <Field className="no-border" type="text" name="email" placeholder="Email"/>
@@ -47,10 +54,10 @@ font-size:1.8rem;
                                 <span>{errors.email}</span>
                         )}
                     <div className="field-child">
-                    <Field className="no-border" type="text" name="pass" placeholder="Password"/>
+                    <Field className="no-border" type="text" name="password" placeholder="Password"/>
                     </div>
-                        {touched.pass && errors.pass && (
-                                <span>{errors.pass}</span>
+                        {touched.password && errors.password && (
+                                <span>{errors.password}</span>
                         )}
                     
                     <BStyle type="submit">Signup!</BStyle>
@@ -62,34 +69,36 @@ font-size:1.8rem;
 
 
     const FormikSignupForm = withFormik({
-        mapPropsToValues({name,lastName,email,pass}){
+        mapPropsToValues({name,username,email,password}){
             return{
                 name: name || "",
-                lastName: lastName || "",
+                username: username || "",
                 email: email || "",
-                pass:  pass|| ""
+                password:  password|| ""
             }
         },
         validationSchema: Yup.object().shape({
             name: Yup.string()
             .required("You must include a first name"),
-            lastName: Yup.string()
-            .required("You must include a last name"),
+            username: Yup.string()
+            .required("You must include a username"),
             email: Yup.string()
             .email("Invalid email")
             .required("You must include an email"),
-            pass: Yup.string()
+            password: Yup.string()
             .min(3, "Too Short!")
             .max(25, "Too Long!")
             .required("You must include a password")
         }),
 
         handleSubmit(values, {setStatus}){
+            console.log("values",values);
             axios
-                .post("", values)
+                .post("https://chore-tracker-app.herokuapp.com/api/auth/register", values)
                 .then(res =>{
-                    // setStatus(res.data)
-                    console.log(res);
+                    setStatus(res.config.data)
+                    console.log("values", values);
+                    console.log("Response", res);
                 })
                 .catch(err => console.log(err.response));
         }
