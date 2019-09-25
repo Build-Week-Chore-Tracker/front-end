@@ -1,0 +1,59 @@
+.App {
+  text-align: center;
+  font-size: 2rem;
+  
+}
+/* NAV CSS + styled components styling in NAVBAR.js */
+.nav-links{
+  text-decoration: none;
+  color:black;
+}
+
+
+
+/* FORM CSS */
+.form-parent-login{
+  display:flex;
+  flex-flow:column;
+  width:25vw;
+  justify-content: center;
+  align-items: center;
+  border:1px solid black;
+  padding:5%;
+  border-radius:10px;
+  background:rgba(26, 165, 239, 0.3)
+}
+
+.form-parent-signup{
+  display:flex;
+  flex-flow:column;
+  width:25vw;
+  justify-content: center;
+  align-items: center;
+  border:1px solid black;
+  padding:5%;
+  border-radius:10px;
+  background:rgba(26, 165, 239, 0.3);
+  
+}
+
+.field-child{
+  border:transparent;
+  border-bottom:1px solid grey;
+  height:5vh;
+  display:flex;
+  margin:5% 0;
+  
+  
+}
+
+.no-border{
+  border: transparent;
+  width:25vw;
+  background:rgba(26, 165, 239, 0.001);
+  font-size:1.8rem;
+}
+
+
+
+
