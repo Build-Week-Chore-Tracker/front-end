@@ -4,10 +4,11 @@ import * as Yup from "yup";
 import axios from "axios"
 
 
- const Childreg = ({props,user,setUser,values, status, errors, touched}) =>{
-    console.log(props)
+
+const Childreg = ({props,user,setUser,values, setStatus,status, errors, touched}) =>{
+    console.log("props",props)
     useEffect(()=>{
-        if(status){
+        if(setStatus){
             setUser([...user, status] )
             // try values after status
         }
@@ -19,8 +20,8 @@ import axios from "axios"
                 <Field type="text" name="username" placeholder="Username"/>
                 <Field type="text" name="password" placeholder="password"/>
                 <Field type="text" name="age" placeholder="age (optional)"/>
-                {/* <Field type="checkbox" name="child"/> */}
-                <button onClick={()=>props.history.push("/")} type="submit">Add Child</button>
+                
+                <button onClick={(props)=>props.history.push("/")} type="submit">Add Child</button>
             </Form>
             </div>
             
@@ -32,9 +33,7 @@ const FormikChildreg = withFormik({
             name: name || "",
             username: username || "",
             password: password || "",
-            age: age || "",
-            points: points || "",
-            child: child || false
+            age: age || ""
         }
     },
     validationSchema:Yup.object().shape({
@@ -44,8 +43,9 @@ const FormikChildreg = withFormik({
     }),
     handleSubmit(values,{setStatus}){
         axios
-            .post("", values)
+            .post("https://chore-tracker-app.herokuapp.com/api/auth/user/register-child", values)
             .then(res => {
+                console.log("childresponse", res)
                 setStatus(res)
             })
             .catch(err => console.log(err.response))

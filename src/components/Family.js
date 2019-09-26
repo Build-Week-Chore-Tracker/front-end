@@ -1,57 +1,38 @@
-import React, {useState,useEffect} from 'react';
-import axios from "axios";
-import {Form,Field,withFormik} from "formik"
-import * as Yup from "yup";
+import React, {useState , useEffect} from 'react';
+// import axios from "axios";
+import {Link} from 'react-router-dom'
+import axiosWithAuth from "./axiosWithAuth";
 
 const Family = ({values, status, errors, touched}) =>{
-    const [user, setUser] = useState([]);
-    console.log("fam",user)
+        const [family, setFamily] = useState([])
         useEffect(()=> {
-            axios   
-                .get("https://chore-tracker-app.herokuapp.com/api/auth/user/16")
+            const userId =localStorage.getItem("user_id")
+            axiosWithAuth() 
+                .get(`https://chore-tracker-app.herokuapp.com/api/auth/user/${userId}`)
                 .then(response => {
-                    console.log("response",response);
-                    setUser(response)
+                    // console.log("response",response);
+                    let family = response.data.family;
+                    setFamily(family)
                 })
-            status && setUser(user => [...user, status])
+                .catch (err=>{console.log("EERROOR",err)})
+            
         },[status]);
+        console.log(family);
     return (
         <div> 
             <h1>Family</h1>
-            {user.map(family => (
+            <Link to="/childreg">Add child</Link>
+            
+            {family.map(users => (
                 <div>
-                    <p>{family.name}</p>
-                </div>
+                    
+                    <p>Welcome! {users.username}</p>
+                </div> 
                 
             ))}
         </div>
     );
 };
-//     const FormikFamily = withFormik({
-//         mapPropsToValues({name, username, password,age,points,child}){
-//             return{
-//                 name: name || "",
-//                 username: username || "",
-//                 password: password || "",
-//                 age: age || "",
-//                 points: points || "",
-//                 child: child || false
-//             }
-//         },
-//         validationSchema:Yup.object().shape({
-//             addfamily: Yup.string()
-//             .oneOf(["child","parent"])
-//             .required("Please choose one!")
-//         }),
-//         handleSubmit(values,{setStatus}){
-//             axios
-//                 .post("", values)
-//                 .then(res => {
-//                     setStatus(res)
-//                 })
-//                 .catch(err => console.log(err.response))
-//         }
-// })(Family)
 
 
 export default Family

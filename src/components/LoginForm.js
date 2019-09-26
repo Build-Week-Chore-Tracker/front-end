@@ -1,5 +1,5 @@
 import React from "react";
-import AxiosAuth from "./AxiosAuth";
+import axiosWithAuth from "./axiosWithAuth";
 import {Form,Field,withFormik} from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
@@ -24,7 +24,7 @@ import styled from "styled-components";
     `;
 
 
-    const LoginForm = ({errors, touched, values, }) => {
+    const LoginForm = ({history,errors, touched, values, }) => {
 
         return (
             <FormDiv>
@@ -69,14 +69,18 @@ import styled from "styled-components";
             .required("You must include a password")
         }),
 
-        handleSubmit(values, ){
-            AxiosAuth()
-                .post("https://chore-tracker-app.herokuapp.com/api/auth/login", values)
+        handleSubmit(values,history ){
+            return axiosWithAuth()
+                .post("/api/auth/login", values)
                 .then(res =>{
-                    
-                    console.log(res);
+                    console.log(values);
+                    localStorage.setItem("user_id",res.data.user)
+                    localStorage.setItem("token",res.data.token )
+                    // console.log(res);
+                
+                    return true;
                 })
-                .catch(err => console.log(err.response));
+                .catch(err => console.log("errrorrr",err.response));
         }
     })(LoginForm)
 
