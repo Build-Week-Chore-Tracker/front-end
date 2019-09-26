@@ -3,6 +3,13 @@
   font-size: 2rem;
   
 }
+
+.to-reg{
+  text-decoration: none;
+  color:grey;
+  margin-top:5%;
+}
+
 /* NAV CSS + styled components styling in NAVBAR.js */
 .nav-links{
   text-decoration: none;

@@ -25,8 +25,8 @@ function App() {
       
       <Route   path="/" component={NavBar} />
       <Route  exact path="/signup" render={props => <SignupForm {...props} user={user} setUser={setUser} />}/>
-      <Route  exact path="/login" render={props => <LoginForm {...props}  />}/>
-      <Route  exact path="/" render={props => <Family {...props}  />}/>
+      <Route  exact path="/" render={props => <LoginForm {...props}  />}/>
+      <Route  exact path="/family" render={props => <Family {...props}  />}/>
       <Route exact path="/childreg" render={props => <Childreg {...props} user={user} setUser={setUser}/>}/>
       <Route  exact path="/chores" component={Chores}/>
       <Route exact path = "/rewards" component={Rewards} />

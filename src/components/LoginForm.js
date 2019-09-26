@@ -3,6 +3,7 @@ import axiosWithAuth from "./axiosWithAuth";
 import {Form,Field,withFormik} from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
+import {Link} from 'react-router-dom'
 
     const FormDiv = styled.div`
         display:flex;
@@ -14,7 +15,7 @@ import styled from "styled-components";
 
     const BStyle = styled.button`
         border:transparent;
-        background:yellow;
+        background:#D99C58;
         width:10vw;
         margin-top:10%;
         border:1px solid black;
@@ -44,7 +45,8 @@ import styled from "styled-components";
                     {touched.password && errors.password && (
                                 <span>{errors.password}</span>
                         )}
-                    <BStyle type="submit">Login!</BStyle>
+                    <BStyle onClick={()=>history.push("/family")} type="submit">Login!</BStyle>
+                    <Link className="to-reg" to="/signup">Need to signup?</Link>
                 </Form>
             </FormDiv>
         )

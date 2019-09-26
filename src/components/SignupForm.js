@@ -16,7 +16,7 @@ margin-top:6%;
 
 const BStyle = styled.button`
 border:transparent;
-background:yellow;
+background:#D99C58;
 width:10vw;
 margin-top:10%;
 border:1px solid black;
@@ -24,17 +24,8 @@ border-radius:5px;
 height:3vh;
 font-size:1.8rem;
 `;
-    const SignupForm = ({user,setUser,errors, touched, values, setStatus, status}) => {
-        
-        
-        useEffect(()=>{
-            if(setStatus){
-                setUser([...user, status] )
-                console.log("signupuser", user)
-                console.log("signupstatus", status)
-                
-            }
-        },[])
+    const SignupForm = ({history,user,setUser,errors, touched, values, setStatus, status}) => {
+    
         return (
             <FormDiv>
                 <Form className="form-parent-signup">
@@ -63,7 +54,7 @@ font-size:1.8rem;
                                 <span>{errors.password}</span>
                         )}
                     
-                    <BStyle type="submit">Signup!</BStyle>
+                    <BStyle onClick={()=>history.push("/")} type="submit">Signup!</BStyle>
                 </Form>
             </FormDiv>
         )
