@@ -8,7 +8,7 @@ const Family = ({values, status, errors, touched}) =>{
         useEffect(()=> {
             const userId =localStorage.getItem("user_id")
             axiosWithAuth() 
-                .get(`https://chore-tracker-app.herokuapp.com/api/auth/user/${userId}`)
+                .get(`/api/auth/user/${userId}`)
                 .then(response => {
                     // console.log("response",response);
                     let family = response.data.family;
