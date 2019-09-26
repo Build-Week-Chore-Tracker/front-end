@@ -13,7 +13,7 @@ const NavBar = () => {
     return (
         <NavDiv>
             <h1>Chore Tracker!</h1>
-            <Link className="nav-links" to="/">Family</Link>
+            <Link className="nav-links" to="/family">Family</Link>
             <Link className="nav-links" to="/Chores">Chores</Link>
             <Link className="nav-links" to="/rewards">Rewards</Link>
             <Link className="nav-links" to="/settings">Settings</Link>
