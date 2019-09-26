@@ -24,12 +24,15 @@ border-radius:5px;
 height:3vh;
 font-size:1.8rem;
 `;
-    const SignupForm = ({user,setUser,errors, touched, values, status}) => {
+    const SignupForm = ({user,setUser,errors, touched, values, setStatus, status}) => {
         
-        console.log("user", user)
+        
         useEffect(()=>{
-            if(status){
+            if(setStatus){
                 setUser([...user, status] )
+                console.log("signupuser", user)
+                console.log("signupstatus", status)
+                
             }
         },[])
         return (
@@ -91,14 +94,16 @@ font-size:1.8rem;
             .required("You must include a password")
         }),
 
-        handleSubmit(values, {setStatus}){
+        handleSubmit(values, {status, setStatus}){
             console.log("values",values);
             axios
                 .post("https://chore-tracker-app.herokuapp.com/api/auth/register", values)
                 .then(res =>{
                     setStatus(res.config.data)
-                    console.log("values", values);
-                    console.log("Response", res);
+                    // console.log("values", values);
+                    // console.log("Response", res.config.data);
+                    console.log("status", status)
+                    console.log("Response", res)
                 })
                 .catch(err => console.log(err.response));
         }
