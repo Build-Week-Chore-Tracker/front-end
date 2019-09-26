@@ -5,14 +5,9 @@ import axios from "axios"
 
 
 
-const Childreg = ({props,user,setUser,values, setStatus,status, errors, touched}) =>{
-    console.log("props",props)
-    useEffect(()=>{
-        if(setStatus){
-            setUser([...user, status] )
-            // try values after status
-        }
-    },[])
+const Childreg = ({history,user,setUser,values, setStatus,status, errors, touched}) =>{
+    
+    
     return (
         <div>
         <Form>
@@ -21,14 +16,14 @@ const Childreg = ({props,user,setUser,values, setStatus,status, errors, touched}
                 <Field type="text" name="password" placeholder="password"/>
                 <Field type="text" name="age" placeholder="age (optional)"/>
                 
-                <button onClick={(props)=>props.history.push("/")} type="submit">Add Child</button>
+                <button onClick={()=>history.push("/family")} type="submit">Add Child</button>
             </Form>
             </div>
-            
+    
     )
-}
-const FormikChildreg = withFormik({
-    mapPropsToValues({name, username, password,age,points,child}){
+};
+    const FormikChildreg = withFormik({
+    mapPropsToValues({name, username, password,age}){
         return{
             name: name || "",
             username: username || "",
